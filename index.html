@@ -17,9 +17,9 @@
     </div>
 
     <main class="flex-row justify-space-between">
-        <div class="container-md">
-            <section class="card">
-                <div class="card-header col-12 col-md-4" id="city-search">
+        <div class="col-12 col-md-4">
+            <div class="card">
+                <div class="card-header" id="city-search">
                     <h3>Search for City:</h3>
                     <form id="city-form" class="card-body">
                         <input name="city" id="cityname" type="text" placeholder="San Antonio" autofocus="true" class="form-input" />
@@ -27,21 +27,23 @@
                     </form>
                 </div>
 
-                <div id="citycontainer" class="list group col-12 col-md-4"> 
-                    
+                <div id="citycontainer" class="list group">
+                    <div class="card">
+                        <h3 class="subtitle"><span id="city-search-term"></span></h3>
+                    </div>
                 </div>
-            </section>
-            
-            <section class="col-12 col-md-8" id="cityDisplay">
-                <div>
-                    2
-                </div>
-                <div class="col-8">
-                    3
-                </div>
-            </section>
+            </div>
         </div>
+        <section class="col-12 col-md-8" id="cityDisplay">
+            <div>
+                2
+            </div>
+            <div class="col-8">
+                3
+            </div>
+        </div>
+    </section>
     </main>
-    <script src="./assets/js/homepage.js"></script>
+<script src="./assets/js/homepage.js"></script>
 </body>
 </html>
