@@ -46,9 +46,7 @@ var getCityName = function(city) {
   };
 
   var displayCityInfo = function(repos, citySearch) {
-   
-    // loop over repos
-    for (var i = 0; i < repos.length; i++) {
+    
     // format repo name
     var repoName = repos[i].owner.login + "/" + repos[i].name;
   
@@ -81,7 +79,7 @@ var getCityName = function(city) {
 
     // append container to the dom
     repoContainerEl.appendChild(repoEl);
-    }
+    
   };
 
 cityFormEl.addEventListener("submit", formSubmitHandler);
