@@ -7,11 +7,10 @@ var formSubmitHandler = function(event) {
     event.preventDefault();
 
     // get value from input element
-    var cityname = nameInputEl.value.trim();
-        console.log("test");
+    var cityName = nameInputEl.value.trim();
 
-    if (cityname) {
-    getCityName(cityname);
+    if (cityName) {
+    getCityName(cityName);
 
     // //clear old content
     // cityContainerEl.textContent = '';
@@ -21,29 +20,29 @@ var formSubmitHandler = function(event) {
 }
 };
 
-// var getCityName = function(city) {
-//     // format the github api url
-//     var apiUrl = "https://api.openweathermap.org/data/2.5/onecall?q=" + user + "/repos";
+var getCityName = function(city) {
+    // format the github api url
+    var apiUrl = "api.openweathermap.org/data/2.5/weather?q={" + city + "}&appid={51b22f5daf88b1f52a19bc947c618268}";
   
-//     // make a request to the url
-//     fetch(apiUrl)
-//       .then(function(response) {
-//       //response was successful
-//       if (response.ok) {
-//           console.log(response);
-//           response.json()
-//           .then(function(data) {
-//           console.log(data);
-//           displayRepos(data, user);
-//         });
-//       } else {
-//         alert('Error: ' + response.statusText);
-//       }
-//     })
-//     .catch(function(error) {
-//       // Notice this `.catch()` getting chained onto the end of the `.then()` method
-//       alert("Unable to connect to GitHub");
-//     });
-//   };
+    // make a request to the url
+    fetch(apiUrl)
+      .then(function(response) {
+      //response was successful
+      if (response.ok) {
+          console.log(response);
+        //   response.json()
+        //   .then(function(data) {
+        //   console.log(data);
+        //   displayRepos(data, user);
+        // });
+      } else {
+        alert('Error: ' + response.statusText);
+      }
+    })
+    .catch(function(error) {
+      // Notice this `.catch()` getting chained onto the end of the `.then()` method
+      alert("Unable to connect to capture city");
+    });
+  };
 
 cityFormEl.addEventListener("submit", formSubmitHandler);
