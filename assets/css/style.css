@@ -45,6 +45,7 @@ header {
   
   .card-body {
     padding: 2.5%;
+    justify-self: center;
   }
   
   /* FORM */

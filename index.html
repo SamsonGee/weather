@@ -10,11 +10,13 @@
 </head>
 
 <body>
-    <div class="container-md header">
-        <header>
+    <header>
+        <div class="container-md header">
+            <div class="">
             <span>Weather Dashboard</span>
-        </header>
-    </div>
+            <div>
+        </div>
+    </header>
 
     <main class="flex-row justify-space-between">
         <div class="col-12 col-md-4">
@@ -28,21 +30,29 @@
                 </div>
 
                 <div id="citycontainer" class="list group">
-                    <div class="card">
-                        <h3 class="subtitle"><span id="city-search-term"></span></h3>
+                    <div class="card-body">
+                        <h4 class="subtitle"><span id="city-search-term"></span></h4>
                     </div>
                 </div>
             </div>
         </div>
-        <section class="col-12 col-md-8" id="cityDisplay">
-            <div>
-                2
+
+        <div class="col-12 col-md-8" id="cityDisplay"></div>
+            <div id="main-card" >
+                <div id="city-display"></div>
+                <div id="city-temp"></div>
+                <div id="city-wind"></div>
+                <div id="city-humidity"></div>
+                <div id="city-uv"></div>
             </div>
-            <div class="col-8">
-                3
+
+            <div class="col-12 col-md-8">
+                <h4>5-Day Forecast:</h4>
+                <div id="days-ahead"></div>
             </div>
         </div>
-    </section>
+        
+        </div>
     </main>
 <script src="./assets/js/homepage.js"></script>
 </body>
