@@ -10,15 +10,15 @@ var formSubmitHandler = function(event) {
     var cityname = nameInputEl.value.trim();
         console.log("test");
 
-//     if (cityname) {
-//     getCityName(cityname);
+    if (cityname) {
+    getCityName(cityname);
 
-//     // //clear old content
-//     // cityContainerEl.textContent = '';
-//     // nameInputEl.value = '';
-//     // } else {
-//     // alert("Please enter a real city");
-// }
+    // //clear old content
+    // cityContainerEl.textContent = '';
+    // nameInputEl.value = '';
+    // } else {
+    // alert("Please enter a real city");
+}
 };
 
 // var getCityName = function(city) {
