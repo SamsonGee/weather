@@ -30,11 +30,11 @@ var getCityName = function(city) {
       //response was successful
       if (response.ok) {
           console.log(response);
-        //   response.json()
-        //   .then(function(data) {
-        //   console.log(data);
-        //   displayRepos(data, user);
-        // });
+          response.json()
+          .then(function(data) {
+          console.log(data);
+          displayRepos(data, city);
+        });
       } else {
         alert('Error: ' + response.statusText);
       }
