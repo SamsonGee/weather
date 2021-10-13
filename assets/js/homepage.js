@@ -23,7 +23,7 @@ var formSubmitHandler = function(event) {
 
 var getCityName = function(city) {
     // format the github api url
-    var apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=51b22f5daf88b1f52a19bc947c618268";
+    var apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=51b22f5daf88b1f52a19bc947c618268&units=imperial";
   
     // make a request to the url
     fetch(apiUrl)
@@ -48,18 +48,20 @@ var getCityName = function(city) {
 
   var displayCityInfo = function(weather, citySearch) {
     
+    //had to figure out to get moment back in here, wtheck, how do i keep up with this? but I do??
     var date = moment().format("MM-DD-YYYY")
 
+    //this was an wierd one to figure out.
     var skyStat = weather.weather[0].icon
 
     //console.log(skyStat)
 
     citySearchTerm.textContent = citySearch
-    
+
     // if city pulls up
     if (weather) {
 
-    // format repo name
+    // format city name 
     var searchedCity = weather.name
     console.log(searchedCity)
   
@@ -68,29 +70,26 @@ var getCityName = function(city) {
     titleEl.classList = "list-item flex-row justify-space-between align-center";
     titleEl.textContent = searchedCity + " " + date + " "
 
+    //this made me so so mad
     var icon = document.createElement("img")
+    icon.classList = 'list-item flex-row justify-space-between align-center';
     icon.src = "http://openweathermap.org/img/wn/" + skyStat + "@2x.png";
     // console.log(icon)
 
     titleEl.appendChild(icon);
     
+    //psuedo code I need, to get the tempertature to the page as well
+    var tempVal = weather.main.temp;
+    var tempertature = document.createElement("p");
+     tempertature.classList = 'list-item flex-row justify-space-between align-center';
+     tempertature.textContent = tempVal + "° F"
+
+     titleEl.appendChild(tempertature)
+
+     //since temp worked out so well, i'm going ot save and figure out wind
     
-    // // create a status element
-    // var statusEl = document.createElement("span");
-    // statusEl.classList = "flex-row align-center";
 
-    // // check if current repo has issues or not
-    // if (repos[i].open_issues_count > 0) {
-    // statusEl.innerHTML =
-    //     "<i class='fas fa-times status-icon icon-danger'></i>" + repos[i].open_issues_count + " issue(s)";
-    // } else {
-    // statusEl.innerHTML = "<i class='fas fa-check-square status-icon icon-success'></i>";
-    // }
 
-    // // append to container
-    // repoEl.appendChild(statusEl);
-
-    // append container to the dom
     cityContainerEl.appendChild(titleEl);
     }
   };
