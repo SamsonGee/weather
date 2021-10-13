@@ -50,7 +50,12 @@ var getCityName = function(city) {
     
     var date = moment().format("MM-DD-YYYY")
 
+    var skyStat = weather.weather[0].icon
+
+    //console.log(skyStat)
+
     citySearchTerm.textContent = citySearch
+    
     // if city pulls up
     if (weather) {
 
@@ -59,9 +64,15 @@ var getCityName = function(city) {
     console.log(searchedCity)
   
     // create a span element to hold repository name
-    var titleEl = document.createElement("span");
+    var titleEl = document.createElement("h3");
     titleEl.classList = "list-item flex-row justify-space-between align-center";
-    titleEl.textContent = searchedCity + " " + date
+    titleEl.textContent = searchedCity + " " + date + " "
+
+    var icon = document.createElement("img")
+    icon.src = "http://openweathermap.org/img/wn/" + skyStat + "@2x.png";
+    // console.log(icon)
+
+    titleEl.appendChild(icon);
     
     
     // // create a status element
