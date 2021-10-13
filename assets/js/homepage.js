@@ -48,6 +48,8 @@ var getCityName = function(city) {
 
   var displayCityInfo = function(weather, citySearch) {
     
+    var date = moment().format("MM-DD-YYYY")
+
     citySearchTerm.textContent = citySearch
     // if city pulls up
     if (weather) {
@@ -56,35 +58,29 @@ var getCityName = function(city) {
     var searchedCity = weather.name
     console.log(searchedCity)
   
-    // create a container for each repo
-    var cardEL = document.createElement("span");
-    cardEL.classList = "list-item flex-row justify-space-between align-center";
-    cardEL.innerHTML = searchedCity
-  
     // create a span element to hold repository name
     var titleEl = document.createElement("span");
-    titleEl.textContent = searchedCity;
-  
-    // append to container
-    repoEl.appendChild(titleEl);
+    titleEl.classList = "list-item flex-row justify-space-between align-center";
+    titleEl.textContent = searchedCity + " " + date
     
-    // create a status element
-    var statusEl = document.createElement("span");
-    statusEl.classList = "flex-row align-center";
+    
+    // // create a status element
+    // var statusEl = document.createElement("span");
+    // statusEl.classList = "flex-row align-center";
 
-    // check if current repo has issues or not
-    if (repos[i].open_issues_count > 0) {
-    statusEl.innerHTML =
-        "<i class='fas fa-times status-icon icon-danger'></i>" + repos[i].open_issues_count + " issue(s)";
-    } else {
-    statusEl.innerHTML = "<i class='fas fa-check-square status-icon icon-success'></i>";
-    }
+    // // check if current repo has issues or not
+    // if (repos[i].open_issues_count > 0) {
+    // statusEl.innerHTML =
+    //     "<i class='fas fa-times status-icon icon-danger'></i>" + repos[i].open_issues_count + " issue(s)";
+    // } else {
+    // statusEl.innerHTML = "<i class='fas fa-check-square status-icon icon-success'></i>";
+    // }
 
-    // append to container
-    repoEl.appendChild(statusEl);
+    // // append to container
+    // repoEl.appendChild(statusEl);
 
     // append container to the dom
-    repoContainerEl.appendChild(repoEl);
+    cityContainerEl.appendChild(titleEl);
     }
   };
 
