@@ -80,16 +80,49 @@ var getCityName = function(city) {
     
     //psuedo code I need, to get the tempertature to the page as well
     var tempVal = weather.main.temp;
+    var humidity = weather.main.humidity;
+    var windSpeed = weather.wind.speed;
+    
+    var uvAPI = "https://api.openweathermap.org/data/2.5/onecall?lat=" + weather.coord.lat + "&lon=" + weather.coord.lon + "&exclude=minutely,hourly,alerts&appid=51b22f5daf88b1f52a19bc947c618268";
+        fetch(uvAPI)
+        .then(function(response) {
+            //response was successful
+            if (response.ok) {
+                console.log(response);
+                response.json()
+                .then(function(data) {
+                console.log(data);
+                var uvEL = document.createElement("p");
+                uvEL.classList = "list-item flex-row justify-space-between align-center";
+                //uvEL.textContent = 
+
+              });
+            } else {
+              alert('Error: ' + response.statusText);
+            }
+          })
+          .catch(function(error) {
+            // Notice this `.catch()` getting chained onto the end of the `.then()` method
+            alert("Unable to connect to capture city");
+          });
+    
+    console.log(uvAPI)
+    console.log(humidity)
+    console.log(windSpeed);
+
     var tempertature = document.createElement("p");
      tempertature.classList = 'list-item flex-row justify-space-between align-center';
      tempertature.textContent = tempVal + "° F"
 
-     titleEl.appendChild(tempertature)
+     
 
      //since temp worked out so well, i'm going ot save and figure out wind
+     var windEL = document.createElement("p");
+     windEL.classList = 'list-item flex-row justify-space-between align-center';
+     windEL.textContent = "Wind: " + windSpeed + " MPH"
     
-
-
+    titleEl.appendChild(windEL)
+    titleEl.appendChild(tempertature)
     cityContainerEl.appendChild(titleEl);
     }
   };
