@@ -21,10 +21,54 @@ var formSubmitHandler = function(event) {
 }
 };
 
+function uvAPI(lat, lon) { 
+  // "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&exclude=minutely,hourly,alerts&appid=51b22f5daf88b1f52a19bc947c618268";
+        fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely,hourly,alerts&appid=51b22f5daf88b1f52a19bc947c618268`)
+        .then(function(response) {
+            //response was successful
+            if (response.ok) {
+                console.log(response);
+                response.json()
+                .then(function(data) {
+                console.log(data);
+                var uVI = data.current.uvi
+                console.log(uVI)
+                  // return data;
+                  var uvEL = document.createElement("p");
+                  
+                  // UVI background determinded by the UVI #
+                  if (parseInt(uVI) < 3) {
+                    uvEL.style.backgroundColor = "green";
+                    // make UVI an interger 
+                    //compare UVI to a certain threshold
+                    // if passes a certain threshold, up to another threshold, it is a certain background color
+                    //how would i background color?
+                    // uvEL.style.backgroundColor = green, red, orange based on UVI index #
+                  }
+                  else if (parseInt(uVI) < 6) {
+                    uvEL.style.backgroundColor = "yellow";
+                  }
+                  else {
+                    uvEL.style.backgroundColor = "red";
+                  }
+                  uvEL.classList = 'list-item flex-row justify-space-between align-center';
+                  uvEL.textContent = `UV Index: ${uVI}`;
+                  cityContainerEl.appendChild(uvEL)
+              });
+            } else {
+              alert('Error: ' + response.statusText);
+            }
+          })
+          .catch(function(error) {
+            // Notice this `.catch()` getting chained onto the end of the `.then()` method
+            alert("Unable to connect to capture city");
+          });
+    }; 
+
 var getCityName = function(city) {
     // format the github api url
-    var apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=51b22f5daf88b1f52a19bc947c618268&units=imperial";
-  
+    // var apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=51b22f5daf88b1f52a19bc947c618268&units=imperial";
+    var apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=51b22f5daf88b1f52a19bc947c618268&units=imperial`;
     // make a request to the url
     fetch(apiUrl)
       .then(function(response) {
@@ -83,28 +127,30 @@ var getCityName = function(city) {
     var humidity = weather.main.humidity;
     var windSpeed = weather.wind.speed;
     
-    var uvAPI = "https://api.openweathermap.org/data/2.5/onecall?lat=" + weather.coord.lat + "&lon=" + weather.coord.lon + "&exclude=minutely,hourly,alerts&appid=51b22f5daf88b1f52a19bc947c618268";
-        fetch(uvAPI)
-        .then(function(response) {
-            //response was successful
-            if (response.ok) {
-                console.log(response);
-                response.json()
-                .then(function(data) {
-                console.log(data);
-                var uvEL = document.createElement("p");
-                uvEL.classList = "list-item flex-row justify-space-between align-center";
-                //uvEL.textContent = 
-
-              });
-            } else {
-              alert('Error: ' + response.statusText);
-            }
-          })
-          .catch(function(error) {
-            // Notice this `.catch()` getting chained onto the end of the `.then()` method
-            alert("Unable to connect to capture city");
-          });
+    // var uvAPI = "https://api.openweathermap.org/data/2.5/onecall?lat=" + weather.coord.lat + "&lon=" + weather.coord.lon + "&exclude=minutely,hourly,alerts&appid=51b22f5daf88b1f52a19bc947c618268";
+    //     fetch(uvAPI)
+    //     .then(function(response) {
+    //         //response was successful
+    //         if (response.ok) {
+    //             console.log(response);
+    //             response.json()
+    //             .then(function(data) {
+    //             console.log(data);
+    //             uVI = data.current.uvi
+    //             console.log(uVI)
+    //             var uvEL = document.createElement("p");
+    //             uvEL.classList = 'list-item flex-row justify-space-between align-center';
+    //             console.log(uVI, "uvi");
+    //             titleEl.appendChild(uvEL)
+    //           });
+    //         } else {
+    //           alert('Error: ' + response.statusText);
+    //         }
+    //       })
+    //       .catch(function(error) {
+    //         // Notice this `.catch()` getting chained onto the end of the `.then()` method
+    //         alert("Unable to connect to capture city");
+    //       });
     
     console.log(uvAPI)
     console.log(humidity)
@@ -120,10 +166,24 @@ var getCityName = function(city) {
      var windEL = document.createElement("p");
      windEL.classList = 'list-item flex-row justify-space-between align-center';
      windEL.textContent = "Wind: " + windSpeed + " MPH"
+     
+     var humidityEl = document.createElement("p");
+     humidityEl.classList = 'list-item flex-row justify-space-between align-center';
+     humidityEl.textContent = "Humidity " + humidity + " %"
     
-    titleEl.appendChild(windEL)
-    titleEl.appendChild(tempertature)
+
+    //  var uvEL = document.createElement("p");
+    //  uvEL.classList = 'list-item flex-row justify-space-between align-center';
+    //  console.log(uVI, "uvi");
+    // uvEL.textContent = uvAPI(weather.coord.lat, weather.coord.lon);
+    // console.log(uvAPI(weather.coord.lat, weather.coord.lon));
+
+    titleEl.appendChild(tempertature);
+    titleEl.appendChild(windEL);
+    titleEl.appendChild(humidityEl);
+    // titleEl.appendChild(uvEL)
     cityContainerEl.appendChild(titleEl);
+    uvAPI(weather.coord.lat, weather.coord.lon);
     }
   };
 
